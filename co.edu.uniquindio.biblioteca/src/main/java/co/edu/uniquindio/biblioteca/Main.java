@@ -1,14 +1,17 @@
 package co.edu.uniquindio.biblioteca;
 import co.edu.uniquindio.biblioteca.model.Book;
 
-public class Main {
-    public static void main(String[] args) {
-        Book book001 = new Book();
-        Book book002 = new Book();
-        Book book003 = new Book();
-        Book book004 = new Book();
-        Book book005 = new Book();
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
+public class Main {
+    static ArrayList<String> vowelNameBooks = new ArrayList<String>();
+    static Book book001 = new Book();
+    static Book book002 = new Book();
+    static Book book003 = new Book();
+    static Book book004 = new Book();
+    static Book book005 = new Book();
+    public static void main(String[] args) {
         createBook(book001, "La Piedra Filosofal", "J.K. Rowling", "fantasia",
                 1997, 264, "Salamandra");
         createBook(book002, "La Camara Secreta", "J.K. Rowling", "fantasia",
@@ -19,12 +22,7 @@ public class Main {
                 2000, 287, "Salamandra");
         createBook(book005, "La Orden del Fenix", "J.K. Rowling", "fantasia",
                 2003, 293, "Salamandra");
-        System.out.println(book001.getName().toLowerCase().charAt(0));
-        System.out.println(book002.getName());
-        System.out.println(book003.getName());
-        System.out.println(book004.getName());
-        System.out.println(book005.getName());
-        getAmountNamesWithVowels(book003);
+        getVowelsBooksName();
     }
     public static void createBook (Book book, String name, String author, String gender, Integer yearPublish,
                             Integer numberPages, String editorial){
@@ -35,12 +33,21 @@ public class Main {
         book.setNumberPages(numberPages);
         book.setEditorial(editorial);
     }
-    public static Integer getAmountNamesWithVowels(Book book001){
+    public static void getVowelsBooksName(){
+        vowelNameBooks.add(String.valueOf(book001.getName().toLowerCase().charAt(0)));
+        vowelNameBooks.add(String.valueOf(book002.getName().toLowerCase().charAt(0)));
+        vowelNameBooks.add(String.valueOf(book003.getName().toLowerCase().charAt(0)));
+        vowelNameBooks.add(String.valueOf(book004.getName().toLowerCase().charAt(0)));
+        vowelNameBooks.add(String.valueOf(book005.getName().toLowerCase().charAt(0)));
+        System.out.println(vowelNameBooks);
+        getAmountNamesWithVowels(vowelNameBooks);
+    }
+    public static Integer getAmountNamesWithVowels(ArrayList<String> vowelNameBooks){
         Integer amount = 0;
-        String book1 = String.valueOf(book001.getName().toLowerCase().charAt(0));
-        System.out.println(book1);
-        switch (book1) {
-            case "a", "e", "i", "o", "u" -> ++amount;
+        for (var index = 0; index < vowelNameBooks.size(); ++index){
+            switch (vowelNameBooks.get(index)) {
+                case "a", "e", "i", "o", "u" -> ++amount;
+            }
         }
         System.out.println(amount);
         return amount;
